@@ -1,0 +1,93 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+h1,
+h2 {
+  text-align: center;
+  color: #bb86fc;
+  margin-top: 20px;
+}
+
+.text {
+  color: #e0e0e0;
+}
+
+.taskCard {
+  background-color: #2e2e2e;
+  border: 1px solid #4b0082;
+  border-radius: 8px;
+  margin: 20px auto;
+  padding: 15px;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.taskCard:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.7);
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #4b0082;
+  padding-bottom: 10px;
+}
+
+.taskTittle {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #bb86fc;
+}
+
+.headerDate {
+  font-size: 0.9em;
+  color: #a0a0a0;
+}
+
+.taskBody {
+  margin-top: 10px;
+}
+
+.taskBody p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #d1d1d1;
+  margin-bottom: 10px;
+}
+
+.taskBody a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #bb86fc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.taskBody a:hover {
+  text-decoration: underline;
+}
+
+.dateContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: aliceblue;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: #bb86fc;
+}
+
+.doneText {
+  text-decoration: line-through;
+}

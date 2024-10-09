@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block body %}
+    <h1>Nanobits</h1>
+    <p>Num Posts: <strong>{{ num_posts }} post{{num_posts|pluralize}}
+        {%if num_posts > 1%}
+            abc
+        {% else %}
+            cba
+        {% endif %}
+    </strong></p>
+    <p>
+        Nanobits is a platform that connects scientists, engineers, and 
+        tech enthusiasts to share, collaborate, and learn about nanotechnology. 
+        Our mission is to create a platform that fosters innovation, 
+        collaboration, and understanding of the transformative potential 
+        of nanotechnology.
+    </p>
+    <p>
+    {% for post in posts %}
+        <div>
+            <hr>
+            <h2>{{ post.title }}</h2>
+            <div class="date">Posted on {{ post.created_at }}</div>
+            <p>{{ post.content|truncatewords:2 }}</p>
+            <p><a href="{% url 'blog:post_detail' post.id %}"> ->Read More<-</a></p>
+        </div>
+    {% endfor %}
+    </p>
+{% endblock body %}

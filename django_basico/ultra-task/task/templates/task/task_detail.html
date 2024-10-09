@@ -1,0 +1,32 @@
+{% extends "task/base.html" %}
+
+{% block title %}
+  Details 
+{% endblock title %}
+
+{% block body %}
+<div class="taskCard">
+    <div class="taskHeader">
+        <div class="text taskTittle">{{ task.title }}</div>
+        <div class="text">
+            Status: 
+            {% if task.completed %}
+                Done    
+            {% else %}
+                Not Done
+            {% endif %}
+        </div>
+        <div class="text headerDate">Due: {{ task.due_date }}</div>
+    </div>
+
+    <div class="taskBody">
+        <p class="text">{{ task.description }}</p>
+        <div class="text">Days Left Until Due: {{ time_left }}</div>
+        <a href="{% url 'task:home' %}">Back to home</a>
+        <div class="dateContainer">
+            <div class="text">Created At: {{ task.created_at }}</div>
+            <div class="text">Last Update: {{ task.updated_at }}</div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

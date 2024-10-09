@@ -1,0 +1,47 @@
+{% extends "task/base.html" %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block body %}
+    <h1 class="text">To Do:</h1>
+    
+        <h2 class="text">Not Finished ({{ uncompleted|length }})</h2>
+        {% for task in uncompleted %}
+            <div class="taskCard">
+                <div class="taskHeader">
+                    <div class="text taskTittle">{{ task.title|truncatewords:5 }}</div>
+                    <div class="text headerDate">Due: {{ task.due_date }}</div>
+                </div>
+
+                <div class="taskBody">
+                    <p class="text">{{ task.description }}</p>
+                    <a href="{% url 'task:task_detail' task.slug %}">View Details</a>
+                    <div class="dateContainer">
+                        <div class="text">Created At: {{ task.created_at }}</div>
+                        <div class="text">Last Update: {{ task.updated_at }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h2 class="text">Done ({{ completed|length }})</h2>
+        {% for task in completed %}
+            <div class="taskCard">
+                <div class="taskHeader">
+                    <div class="taskTittle doneText">{{ task.title|truncatewords:5 }}</div>
+                    <div class="headerDate">Due: {{ task.due_date }}</div>
+                </div>
+
+                <div class="taskBody">
+                    <p class="doneText">{{ task.description }}</p>
+                    <a href="{% url 'task:task_detail' task.slug %}">View Details</a>
+                    <div class="dateContainer">
+                        <div>{{ task.created_at }}</div>
+                        <div>{{ task.updated_at }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock body %}
