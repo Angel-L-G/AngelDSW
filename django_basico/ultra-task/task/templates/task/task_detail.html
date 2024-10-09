@@ -21,7 +21,7 @@
 
     <div class="taskBody">
         <p class="text">{{ task.description }}</p>
-        <div class="text">Days Left Until Due: {{ time_left }}</div>
+        <div class="text">{{ time_left }} Days Until Due</div>
         <a href="{% url 'task:home' %}">Back to home</a>
         <div class="dateContainer">
             <div class="text">Created At: {{ task.created_at }}</div>

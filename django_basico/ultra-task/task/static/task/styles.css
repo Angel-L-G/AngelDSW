@@ -17,6 +17,19 @@ h2 {
   color: #e0e0e0;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  justify-content: center;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 40%;
+}
+
 .taskCard {
   background-color: #2e2e2e;
   border: 1px solid #4b0082;
