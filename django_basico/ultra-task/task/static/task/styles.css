@@ -1,3 +1,4 @@
+/* BASE STYLES */
 body {
   font-family: "Arial", sans-serif;
   margin: 0;
@@ -24,10 +25,18 @@ h2 {
   justify-content: center;
 }
 
+/*CARD STYLES*/
+
 .innerContainer {
   display: flex;
   flex-direction: column;
   flex-basis: 40%;
+}
+
+.scrollContainer {
+  max-height: 550px;
+  overflow-y: auto;
+  margin-top: 20px;
 }
 
 .taskCard {
@@ -103,4 +112,102 @@ h2 {
 
 .doneText {
   text-decoration: line-through;
+}
+
+.addTaskContainer {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.addTaskContainer a {
+  display: inline-block;
+  background-color: #bb86fc;
+  color: #1e1e1e;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.addTaskContainer a:hover {
+  background-color: #a05ad9;
+  transform: scale(1.05);
+}
+
+.addTaskContainer a:active {
+  transform: scale(0.95);
+}
+
+/*FORM STYLES*/
+
+form {
+  background-color: #2e2e2e;
+  border: 1px solid #4b0082;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+form:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.7);
+}
+
+label {
+  color: #bb86fc;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="text"],
+textarea {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #4b0082;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  font-size: 1em;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #bb86fc;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+label.checkbox-label {
+  display: flex;
+  align-items: center;
+  color: #e0e0e0;
+}
+
+.btn {
+  background-color: #bb86fc;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #1e1e1e;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #a05ad9;
 }

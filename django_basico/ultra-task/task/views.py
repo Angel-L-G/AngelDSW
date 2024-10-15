@@ -1,8 +1,10 @@
 from datetime import date
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.utils.text import slugify
 
-from task.models import Task
+from .forms import AddTaskForm
+from .models import Task
 
 
 def home(request):
@@ -32,3 +34,27 @@ def undone(request):
     not_finished = [task for task in all_tasks if not task.completed]
     status = 'Done'
     return render(request, 'task/task_list.html', {'tasks': not_finished, 'status': status})
+
+
+def addTask(request):
+    if request.method == 'POST':
+        addTaskForm = AddTaskForm(request.POST)
+        if addTaskForm.is_valid():
+            title = addTaskForm.cleaned_data['title']
+            description = addTaskForm.cleaned_data['description']
+            completed = addTaskForm.cleaned_data['completed']
+            due_date = addTaskForm.cleaned_data['due_date']
+
+            task = Task(
+                title=title,
+                description=description,
+                completed=completed,
+                due_date=due_date,
+                slug=slugify(title),
+            )
+
+            task.save()
+            return redirect('task:home')
+    else:
+        addTaskForm = AddTaskForm()
+    return render(request, 'task/addTask.html', {'addTaskForm': addTaskForm})
