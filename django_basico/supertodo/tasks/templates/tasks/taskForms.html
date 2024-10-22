@@ -1,0 +1,14 @@
+{% extends "tasks/base.html" %}
+
+{% block title %}
+  Add Task 
+{% endblock title %}
+
+{% block body %}
+  <form method="post">
+    <br>
+    {% csrf_token %}
+    {{ taskForm }}
+    <input type="submit" value="enviar" class="btn btn-info">
+  </form>
+{% endblock body %}

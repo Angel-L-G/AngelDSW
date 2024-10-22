@@ -1,0 +1,51 @@
+{% extends "tasks/base.html" %}
+
+{% block title %}
+  Details 
+{% endblock title %}
+
+{% block body %}
+
+<div class="card" style="margin-top: 10px">
+    <div class="card-header">
+        <h5 class="card-title">
+            {{ task.title }}
+        </h5>
+    </div>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            Status: 
+            {% if task.done %}
+                Done    
+            {% else %}
+                Not Done
+            {% endif %}
+        </li>
+        <li class="list-group-item card-subtitle mb-2 text-body-secondary">
+            Due: {{ task.complete_before }}
+        </li>
+    </ul>
+    
+    <div class="card-body">
+        <h6 class="">Due: {{ task.due_date }}</h6>
+        <p class="card-text">{{ task.description }}</p>
+        <p><a href="{% url 'tasks:task-list' %}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Back to home</a></p>
+
+        <p><a href="{% url 'tasks:task-edit' task.slug %}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Edit Task</a></p>
+
+        <p><a href="{% url 'tasks:task-delete' task.slug %}" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Delete Task</a></p>
+
+        <p><a href="{% url 'tasks:task-toggle' task.slug %}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Toggle Task</a></p>
+    </div>
+
+    <div class="card-footer">
+        <h6 class="card-subtitle mb-2 text-body-secondary">
+            Created At: {{ task.created_at }}
+        </h6>
+        <h6 class="card-subtitle mb-2 text-body-secondary">
+            Last Update: {{ task.updated_at }}
+        </h6>
+    </div>            
+</div>
+{% endblock body %}
