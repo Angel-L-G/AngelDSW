@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block body %}
-  <form method="post">
+  <form method="post" novalidate>
     <br>
     {% csrf_token %}
     {{ taskForm }}

@@ -1,0 +1,8 @@
+slug = "pokemon"
+bundle = [
+    "docs/README.pdf",
+    "tests/*.py",
+    "requirements.txt",
+    "justfile",
+    "pokemon.json",
+]

@@ -1,0 +1,21 @@
+{% extends "Base.html" %}
+
+{% block title %}
+  ~Home Page~ 
+{% endblock title %}
+
+{% block body %}
+<div class="row gap-4 container-fluid">
+  <div class="list-group">
+    {% for e in echos %}
+      <a href="{% url 'echos:echo-details' e.id %}" class="list-group-item list-group-item-action active" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ e.user.username }}</h5>
+          <small>Created At: {{ e.created_at }}</small>
+        </div>
+        <p class="mb-1">{{ e.content }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</div> 
+{% endblock %}

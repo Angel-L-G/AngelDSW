@@ -11,7 +11,7 @@ def task_list(request):
     all_tasks = Task.objects.all()
     status = 'All Tasks'
 
-    return render(request, 'tasks/task_list.html', {'tasks': all_tasks, 'status': status})
+    return render(request, 'tasks/task_list.html', {'tasks': all_tasks})
 
 
 def done(request):
@@ -41,17 +41,16 @@ def addTask(request):
     if request.method == 'POST':
         addTaskForm = AddTaskForm(request.POST)
         if addTaskForm.is_valid():
-            title = addTaskForm.cleaned_data['title']
+            name = addTaskForm.cleaned_data['name']
             description = addTaskForm.cleaned_data['description']
-            done = addTaskForm.cleaned_data['done']
             complete_before = addTaskForm.cleaned_data['complete_before']
 
             task = Task(
-                title=title,
+                name=name,
                 description=description,
-                done=done,
+                done=False,
                 complete_before=complete_before,
-                slug=slugify(title),
+                slug=slugify(name),
             )
 
             task.save()
@@ -63,11 +62,8 @@ def addTask(request):
 
 def toggle(request, task_slug):
     task = Task.objects.get(slug=task_slug)
-    print(f'1 {task.done}')
     task.done = not task.done
-    print(f'2 {task.done}')
     task.save()
-    print(f'3 {task.done}')
     return redirect('tasks:task-list')
 
 
@@ -82,6 +78,8 @@ def edit(request, task_slug):
     if request.method == 'POST':
         editTaskForm = EditTaskForm(request.POST)
         if editTaskForm.is_valid():
+            task.name = editTaskForm.cleaned_data['name']
+            task.slug = slugify(task.name)
             task.description = editTaskForm.cleaned_data['description']
             task.done = editTaskForm.cleaned_data['done']
             task.complete_before = editTaskForm.cleaned_data['complete_before']

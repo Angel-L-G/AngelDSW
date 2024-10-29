@@ -1,0 +1,18 @@
+{% extends "Base.html" %}
+
+{% block title %}
+  ~Home Page~ 
+{% endblock title %}
+
+{% block body %}
+<div class="row">
+  <div class="col-9">
+    <form method="post" novalidate>
+      <br>
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="enviar" class="btn btn-info">
+    </form>
+  </div>
+</div>
+{% endblock body %}

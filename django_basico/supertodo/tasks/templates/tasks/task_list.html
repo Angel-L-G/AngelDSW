@@ -5,24 +5,65 @@
 {% endblock title %}
 
 {% block body %}
-    <h1 class="text mt-1">{{ tasks|length }} task{{ tasks|length|pluralize }} {{ status }}</h1>
-    <div class="container-fluid d-flex flex-nowrap align-content-center mt-1">
-        <div class="row gap-4">
+    <h1 class="text mt-4">
+        {{ tasks|length }} Task{{ tasks|length|pluralize }} 
+        {% if status %}
+            {{ status }}
+        {% endif %}
+    </h1>
+
+    <div class="container-fluid d-flex flex-nowrap align-content-center mt-3">
+        <div class="row gap-4 container-fluid">
             {% for task in tasks %}
-                <div class="card col-3">
+                <div class="card col-3 mb-4">
                     <div class="card-header">
-                        <h5 class="card-title">
-                            {{ task.title|truncatewords:5 }}
-                        </h5>
+                        {% if task.done %}
+                            <h5 class="card-title text-decoration-line-through">
+                                {{ task.name|truncatewords:4 }}
+                            </h5>
+                        {% else %}
+                            <h5 class="card-title">
+                                {{ task.name|truncatewords:4 }}
+                            </h5>
+                        {% endif %}
                     </div>
                     
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Due: {{ task.due_date }}</h6>
-                        <p class="card-text">{{ task.description|truncatewords:15 }}</p>
-                        <a href="{% url 'tasks:task-detail' task.slug %}" class="card-link">View Details</a>
+                        {% if task.done %}
+                            <h6 class="card-subtitle mb-2 text-body-secondary">Due: {{ task.complete_before|default_if_none:"Not Specified" }}</h6>
+                            {% if task.description %}
+                                <p class="text-decoration-line-through card-text" style="height: 35%">{{ task.description|truncatewords:15 }}</p>
+                            {% else %}
+                                <p class="card-text" style="height: 35%">No Description Given</p>
+                            {% endif %}
+                            
+                        {% else %}
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Due: {{ task.complete_before|default_if_none:"Not Specified" }}</h6>
+                            {% if task.description %}
+                                <p class="card-text" style="height: 35%">{{ task.description|truncatewords:15 }}</p>
+                            {% else %}
+                                <p class="card-text" style="height: 35%">No Description Given</p>
+                            {% endif %}
+                        {% endif %}
+                        
                     </div>
 
-                    <div class="card-footer">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'tasks:task-detail' task.slug %}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover card-link">View Details</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'tasks:task-edit' task.slug %}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Edit Task</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'tasks:task-delete' task.slug %}" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Delete Task</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'tasks:task-toggle' task.slug %}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Toggle Task</a>
+                        </li>
+                    </ul>
+
+                    <div class="card-footer" style="height: 22%">
                         <h6 class="card-subtitle mb-2 text-body-secondary">
                             Created At: {{ task.created_at }}
                         </h6>
