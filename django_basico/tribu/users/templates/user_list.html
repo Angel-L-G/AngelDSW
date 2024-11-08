@@ -1,0 +1,21 @@
+{% extends "Base.html" %}
+
+{% block title %}
+~User List~
+{% endblock title %}
+
+{% block body %}
+<div class="row gap-4 container-fluid">
+  <div class="list-group">
+    {% for user in users %}
+      <a href="{% url 'echos:echo-details' user.username %}" class="list-group-item list-group-item-action list-group-item-success" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ user.username }}</h5>
+          <small>Registered {{ user.created_at|timesince }} Ago</small>
+        </div>
+        <p class="mb-1">{{ user.profile.bio|truncatewords:10 }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</div> 
+{% endblock body %}

@@ -3,7 +3,6 @@ from django.test import Client
 from django.utils.text import slugify
 from model_bakery import baker
 from pytest_django.asserts import assertContains, assertFormError, assertRedirects
-
 from tasks.models import Task
 
 
@@ -169,3 +168,8 @@ def test_toggle_task(client: Client, task):
     response = client.get(url)
     assert response.status_code in [200, 302]
     assert Task.objects.get(pk=task.pk).done is not task.done
+
+
+def test_task_model_is_available_on_admin(admin_client: Client):
+    response = admin_client.get('/admin/tasks/task/')
+    assert response.status_code == 200

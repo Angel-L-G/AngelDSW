@@ -20,14 +20,18 @@ class LoginForm(forms.Form):
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'password', 'first_name', 'last_name', 'email']
         lables = {
             'username': 'username',
+            'password': 'password',
             'email': 'email',
-            'password': 'username',
+            'first_name': 'name',
+            'last_name': 'surname',
         }
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'email': forms.TextInput(attrs={'class': 'form-control mb-3'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control mb-3'}),
+            'email': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
         }

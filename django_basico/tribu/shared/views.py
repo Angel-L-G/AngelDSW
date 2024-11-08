@@ -1,5 +1,6 @@
 # Create your views here.
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from shared.forms import LoginForm, RegisterForm
@@ -15,7 +16,7 @@ def user_register(request):
             return redirect('echos:echos-list')
     else:
         form = RegisterForm()
-    return render(request, 'AuthForms.html', dict(form=form))
+    return render(request, 'AuthForms.html', dict(form=form, status='Register'))
 
 
 def user_login(request):
@@ -28,7 +29,10 @@ def user_login(request):
                 return redirect('echos:echos-list')
     else:
         form = LoginForm()
-    return render(request, 'AuthForms.html', dict(form=form))
+    return render(request, 'AuthForms.html', dict(form=form, status='Login'))
 
 
-# @login_required
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('login')

@@ -6,6 +6,6 @@ from .models import Echo
 
 
 @admin.register(Echo)
-class TaskAdmin(admin.ModelAdmin):
+class EchoAdmin(admin.ModelAdmin):
     list_display = ('content', 'user', 'created_at', 'updated_at')
     pass

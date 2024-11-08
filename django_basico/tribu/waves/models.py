@@ -8,7 +8,7 @@ class Wave(models.Model):
     content = models.TextField()
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    Echo = models.ForeignKey(
+    echo = models.ForeignKey(
         'echos.Echo',
         related_name='waves',
         on_delete=models.CASCADE,
@@ -20,3 +20,6 @@ class Wave(models.Model):
 
     def __str__(self):
         return self.content
+
+    class Meta:
+        ordering = ['-created_at']

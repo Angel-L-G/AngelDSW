@@ -6,17 +6,45 @@
 
 {% block body %}
 <div class="row">
-  <div class="col-9">
+  <div class="col">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">By: {{ echo.user.username }}</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">Created At: {{ echo.created_at }}</h6>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Posted At: {{ echo.created_at }}</h6>
         <p class="card-text"> {{ echo.content }}</p>
-        {% if echo.user.username == user.name %}
-          <a href="#" class="card-link">Edit Echo</a>
-          <a href="#" class="card-link">Delete Echo</a>
+        {% if echo.user == user %}
+          <a href="{% url 'echos:echo-edit' echo.id %}" class="card-link link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Edit Echo</a>
+          <a href="{% url 'echos:echo-delete' echo.id %}" class="card-link link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Delete Echo</a>
         {% endif %}
       </div>
+
+      <div class="card-footer">
+        <form method="post" novalidate action="{% url "echos:echo-add-wave" echo.id %}">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" value="enviar" class="btn btn-info">
+        </form>
+      </div>
+
+      <ul class="list-group">
+        {% for w in waves %}
+          <div class="card-body">
+            <h5 class="card-title">Answered By: {{ w.user.username }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ w.created_at | timesince}} ago</h6>
+            <p class="card-text"> {{ w.content }}</p>
+            {% if w.user == user %}
+              <a href="{% url 'waves:wave-edit' w.pk %}" class="card-link link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Edit Wave</a>
+              <a href="{% url 'waves:wave-delete' w.pk %}" class="card-link link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Delete Wave</a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </ul>
+
+      {% if echo.waves.count > 5 and waves.count < 6 %}
+        <a class="btn btn-outline-info m-1" href="{% url "echos:echo-waves" echo.pk %}">
+          See All The Waves
+        </a>
+      {% endif %}
     </div>
   </div>
 </div>
