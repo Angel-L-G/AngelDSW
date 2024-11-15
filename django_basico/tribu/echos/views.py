@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
-from waves.forms import WaveForm
+
+from waves.forms import WaveAddForm
 from waves.models import Wave
 
 from .forms import AddEchoForm
@@ -45,7 +46,7 @@ def echo_detail(request, id):
         {
             'echo': echo,
             'waves': echo.waves.all()[:5],
-            'form': WaveForm(),
+            'form': WaveAddForm(),
         },
     )
 
@@ -60,7 +61,7 @@ def echo_all_waves(request, id):
         {
             'echo': echo,
             'waves': echo.waves.all(),
-            'form': WaveForm(),
+            'form': WaveAddForm(),
         },
     )
 
@@ -76,7 +77,7 @@ def add_wave_to_echo(request, id):
     )
     wave.save()
 
-    return render(request, 'EchoDetail.html', {'echo': echo, 'form': WaveForm()})
+    return render(request, 'EchoDetail.html', {'echo': echo, 'form': WaveAddForm()})
 
 
 @login_required

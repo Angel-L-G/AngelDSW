@@ -5,5 +5,31 @@
 {% endblock title %}
 
 {% block body %}
-
+  <div class="conatiner">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title" >{{ other_user.username }}</h1>
+        <p class="card-text" >Bio: {{ other_user.profile.bio }}</p>
+        <p>Registered: {{ other_user.created_at|date:"F d, Y" }}</p>
+        <ul class="list-group">
+          {% for echo in echos %}
+            <li class="list-group-item">
+              <a href="{% url 'echos:echo-details' echo.id %}" class="list-group-item list-group-item-action list-group-item-info" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{ echo.user.username }}</h5>
+                  <small>{{ echo.created_at|date:"F d, Y" }}</small>
+                </div>
+                <p class="mb-1">{{ echo.content|truncatewords:20 }}</p>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% if other_user.echos.count > 5 and echos.count < 6 %}
+        <div class="card-footer">
+          <a href="{% url 'users:user-echos' other_user.username %}">See all</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 {% endblock body %}

@@ -6,7 +6,7 @@ from django.urls import reverse
 
 
 class Echo(models.Model):
-    content = models.TextField()
+    content = models.TextField(null=False)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(

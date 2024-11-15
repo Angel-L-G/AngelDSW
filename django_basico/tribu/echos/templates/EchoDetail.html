@@ -10,7 +10,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">By: {{ echo.user.username }}</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">Posted At: {{ echo.created_at }}</h6>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Posted At: {{ echo.created_at|date:"F d, Y" }}</h6>
         <p class="card-text"> {{ echo.content }}</p>
         {% if echo.user == user %}
           <a href="{% url 'echos:echo-edit' echo.id %}" class="card-link link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Edit Echo</a>
