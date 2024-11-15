@@ -7,8 +7,11 @@
 {% block body %}
   <div class="conatiner">
     <div class="card">
+      <div class="card-header d-flex align-items-center g-4">
+        <img class="img-fluid" src="{{other_user.profile.avatar.url}}" alt="Avatar" width="100px">
+        <h1 class="card-title ms-4" >{{ other_user.username }}</h1>
+      </div>
       <div class="card-body">
-        <h1 class="card-title" >{{ other_user.username }}</h1>
         <p class="card-text" >Bio: {{ other_user.profile.bio }}</p>
         <p>Registered: {{ other_user.created_at|date:"F d, Y" }}</p>
         <ul class="list-group">
@@ -30,6 +33,11 @@
           <a href="{% url 'users:user-echos' other_user.username %}">See all</a>
         </div>
       {% endif %}
+      {% if user == other_user %}
+        <a href="{% url 'users:user-edit' user.username %}" class="btn btn-outline-success">Edit</a>
+      {% endif %}
     </div>
+
+    
   </div>
 {% endblock body %}

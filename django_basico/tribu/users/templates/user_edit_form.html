@@ -1,0 +1,14 @@
+{% extends "Base.html" %}
+
+{% block title %}
+  Add {{ object_name }} 
+{% endblock title %}
+
+{% block body %}
+    <form method="post" novalidate class="mt-9" enctype="multipart/form-data">
+      <br>
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="enviar" class="btn btn-info">
+    </form>
+{% endblock body %}

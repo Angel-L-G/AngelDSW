@@ -34,4 +34,4 @@ def edit_wave(request, id):
             return redirect('echos:echo-details', echo_id=wave.echo.id)
     else:
         wave_form = WaveEditForm(instance=wave)
-        return render(request, 'Forms.html', {'form': wave_form})
+    return render(request, 'Forms.html', {'form': wave_form})

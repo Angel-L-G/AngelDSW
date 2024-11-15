@@ -12,7 +12,7 @@ class Profile(models.Model):
         related_name='profile',
     )
     bio = models.TextField(max_length=500, blank=True)
-    avatar = models.ImageField(upload_to='avatars/')
+    avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
 
     def __str__(self):
         return self.bio
