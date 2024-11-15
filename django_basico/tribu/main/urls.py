@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import include, path
-from shared import views
+
+from accounts import views
 
 urlpatterns = [
     path('', lambda _: redirect('echos/')),

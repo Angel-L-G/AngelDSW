@@ -36,6 +36,7 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 
 INSTALLED_APPS = [
     'shared.apps.SharedConfig',
+    'accounts.apps.AccountsConfig',
     'echos.apps.EchosConfig',
     'waves.apps.WavesConfig',
     'users.apps.UsersConfig',
